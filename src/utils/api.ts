@@ -15,6 +15,9 @@ const getPokemonImageUrl = (id: number): string => {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 };
 
+// loading確認用ディレイ（後で消す。）
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 // ポケモン一覧を取得する関数
 export async function fetchPokemonList(page: number = 1): Promise<{
   pokemonList: PokemonCardType[];
@@ -30,6 +33,8 @@ export async function fetchPokemonList(page: number = 1): Promise<{
     if (!response.ok) {
       throw new Error('Failed to fetch Pokemon list');
     }
+  // loading確認用ディレイ（後で消す。）
+  await delay(3000); // 3秒の遅延
 
     // PokemonListResponseTypeはTypeScriptの型（types/pokemon.ts参照）
     const data: PokemonListResponseType = await response.json();
