@@ -36,11 +36,7 @@ export default async function PokemonPage({ params }: Props) {
       </main>
     );
   } catch (error) {
-    console.error('Error in page component:', error);  // 開発者用のエラーログ
-    return (
-      <div className="p-4">
-        <p className="text-red-500">データの取得に失敗しました。</p>
-      </div>
-    );
+    console.error('Error in page component:', error);  // ログは残す
+    throw error; // エラーを再スローして、Next.jsのエラーハンドリングを使用
   }
 }
