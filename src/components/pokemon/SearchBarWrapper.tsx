@@ -33,7 +33,7 @@ export const SearchBarWrapper = ({
       params.delete('types');
     }
 
-    // ページは1に戻す
+    // ページは1に戻す（検索条件が変わったため）
     router.push(`/page/1?${params.toString()}`);
   };
 

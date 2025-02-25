@@ -1,6 +1,8 @@
-// src/components/pokemon/Pagenation.tsx
+// src/components/pokemon/Pagination.tsx
+'use client';
 
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 interface Props {
   currentPage: number;
@@ -8,6 +10,15 @@ interface Props {
 }
 
 export const Pagination = ({ currentPage, totalPages }: Props) => {
+  const searchParams = useSearchParams();
+
+  // 現在のクエリパラメータを含めたURLを生成する関数
+  const createPageUrl = (pageNumber: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    return `/page/${pageNumber}${params.toString() ? `?${params.toString()}` : ''}`;
+  };
+  
+
   // 表示するページ番号の範囲を計算
   const getPageNumbers = () => {
     const delta = 2; // 現在のページの前後に表示するページ数
@@ -49,7 +60,7 @@ export const Pagination = ({ currentPage, totalPages }: Props) => {
         </span>
       ) : (
         <Link
-          href={`/page/${currentPage - 1}`}
+          href={createPageUrl(currentPage - 1)}
           className="px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-50"
         >
           前へ
@@ -63,7 +74,7 @@ export const Pagination = ({ currentPage, totalPages }: Props) => {
         ) : (
           <Link
             key={index}
-            href={`/page/${pageNum}`}
+            href={createPageUrl(pageNum as number)}
             className={`px-3 py-2 rounded-lg ${
               pageNum === currentPage
                 ? 'bg-blue-600 text-white'
@@ -82,7 +93,7 @@ export const Pagination = ({ currentPage, totalPages }: Props) => {
         </span>
       ) : (
         <Link
-          href={`/page/${currentPage + 1}`}
+          href={createPageUrl(currentPage + 1)}
           className="px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-50"
         >
           次へ
