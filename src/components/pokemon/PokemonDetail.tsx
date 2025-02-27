@@ -1,7 +1,7 @@
 // src/components/pokemon/PokemonDetail.tsx
 import Image from 'next/image';
 import Link from 'next/link';
-import { PokemonDetail as PokemonDetailType } from '@/types/pokemon';
+import { PokemonDetailType } from '@/types/pokemon';
 
 interface Props {
   pokemon: PokemonDetailType;
